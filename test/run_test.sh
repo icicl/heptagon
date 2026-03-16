@@ -14,7 +14,7 @@ rm test/out_trees/heptagon.txt
 rm test/out_trees/_RFdistances.txt
 
 if [ -f quicktree ] ; then
-printf "======================\n\n\e[0;32mRunning HEPTAGON\e[0m\n"
+printf "======================\n\n\e[0;32mRunning QUICKTREE\e[0m\n"
 time ./quicktree -in m test/$simname.dist.phylip | tr -d '\n' > test/out_trees/quicktree.txt
 python3 MAPLE.py --inputTree test/$simname.treefile --inputRFtrees test/out_trees/quicktree.txt --output test/out_trees/ > /dev/null
 echo $'\nNormalized Robinson Foulds Distance:'
@@ -26,7 +26,7 @@ rm test/out_trees/_RFdistances.txt
 fi;
 
 if [ -f dipper ] ; then
-printf "======================\n\n\e[0;32mRunning HEPTAGON\e[0m\n"
+printf "======================\n\n\e[0;32mRunning DIPPER\e[0m\n"
 time ./dipper -i d -o t -I test/$simname.dist.phylip -O test/out_trees/dipper.txt
 python3 MAPLE.py --inputTree test/$simname.treefile --inputRFtrees test/out_trees/dipper.txt --output test/out_trees/ > /dev/null
 echo $'\nNormalized Robinson Foulds Distance:'
