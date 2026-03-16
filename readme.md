@@ -41,49 +41,6 @@ You can install Quicktree with the following:
 ```
 git clone https://github.com/khowe/quicktree.git
 cd quicktree/
-# HEPTAGON - Heuristic Phylogenetic Tree Algorithm for GPU-Optimized Neighbor-Joining
-
-### HEPTAGON is a software designed to efficiently construct phylogenetic trees for pairwise distance matrices, by performing neighbor joining on NVIDIA GPUs. It takes as input a file containing a distance matrix in Phylip format, and outputs a Newick formatted phylogenetic tree.
-
-## Installation
-To compile, simply download and run `make` to use the included makefile. This will produce the executable binary file `./heptagon`.
-
-```
-git clone https://github.com/icicl/heptagon.git
-cd heptagon/
-make
-```
-
-## Usage
-`./heptagon --in <input_file> [--unflatten] [--skeleton-size n]`
-The `--in` argument is required, and must be the path to a distance matrix in phylip format. It may have any extension.
-The optional `--unflatten` argument will cause the output to print each taxon to a new line. If omitted, the output will be a single line.
-The optional `--skeleton-size` argument specifies the number of taxa *k* that should be used to build the skeleton. If the given file has more than *k* taxa, a skeleton will constructed from *k* of them using neighbor joining, and then the remaining taxa will be added to this skeleton tree using a nearest-neighbor heuristic. Default value is 20000.  Larger values will be more accurate, however you will need a GPU with roughly **(4⋅k²) Bytes** of VRAM.
-
-Debug info is printed to stderr, so you can pipe the output tree into a file to save it.
-
-## Example
-`./heptagon --in ./data/sim100k.dist.phylip --skeleton-size 30000 > sim100k.tree`
-
-
-## Testing
-
-I have included some test files in `test/`. There you may download test files for a larger number of taxa *N*:
-```
-pip install gdown
-gdown --folder https://drive.google.com/drive/folders/1uHfUkZ9JqKQ4S4YB4C-CDasb5oqsm110
-```
-
-Extract the test files: 
-```
-gunzip test/*.gz
-```
-
-I compared my results against [Quicktree](https://github.com/khowe/quicktree) and [DIPPER](https://github.com/TurakhiaLab/DIPPER), both of which also implement neighbor joining. See DIPPER's GitHub for how to install it.
-You can install Quicktree with the following:
-```
-git clone https://github.com/khowe/quicktree.git
-cd quicktree/
 make
 cd ..
 mv quicktree/quicktree qtree
